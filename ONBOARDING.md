@@ -69,27 +69,31 @@
 
 ---
 
-## 3. ⚠️ 先把项目挪出 OneDrive（重要）
+## 3. ⚠️ 文件存放规则：文档在 OneDrive，代码在 C:\lean（重要）
 
-你现在这个文件夹在 OneDrive 同步盘里（`...\OneDrive - CUHK-Shenzhen\桌面\...`）。
-Lean 项目一旦编译，会在项目里生成 `.lake\` 目录：**几 GB、几万个小文件**
+Lean 项目一旦编译，会在项目里生成 `.lake\` 目录：**约 7 GB、几万个文件**
 （mathlib 的预编译结果）。让 OneDrive 同步这些东西有三个坏处：
 
 * 上传/下载几 GB，磁盘和网络一直响；
 * OneDrive 同步时会锁文件，编译偶尔报"文件被占用"之类的怪错；
 * 路径很长，容易踩 Windows 的路径长度限制。
 
-所以约定是：**文档和源码可以留在 OneDrive（当备份），但"编译用的工作副本"
-要放在不被同步的目录**。这件事**已经替你做好了**：
+所以规则是：**文档放 OneDrive，代码放 `C:\lean`（以后可以是 `E:\lean`）**。
+已经替你安排好了：
 
-```powershell
-cd C:\lean\lean-formalization-study     # 以后都在这里工作
+```text
+OneDrive\桌面\Lean Formalization-Independent study\   ← 资料区（自动同步，手机也能看）
+├─ papers\      四篇论文 PDF
+├─ notes\       读书笔记 / 定理清单草稿
+└─ README.md    这个布局的说明
+
+C:\lean\                                              ← 代码区（不参与 OneDrive 同步）
+├─ lean-formalization-study\   指南仓库（工作副本，已编译通过）
+├─ reference\n4code_lean_dev\  你老师仓库的克隆，用来对照写法
+└─ _archive\...                早期放在 OneDrive 的那份代码（已归档，可删）
 ```
 
-这份工作副本是从 GitHub 克隆的，并且已经跑通 `lake exe cache get` + `lake build`
-（约 7 GB 构建产物都在 `C:\lean` 下，不碰 OneDrive）。
-
-换电脑、或者想重建一份时：
+换电脑、或者想重建一份代码副本时：
 
 ```powershell
 New-Item -ItemType Directory -Force C:\lean | Out-Null
@@ -100,8 +104,12 @@ lake exe cache get     # 取 mathlib 预编译产物（第一次要下载几 GB�
 lake build             # 编译（几分钟）
 ```
 
-如果你就是想留在 OneDrive 这个目录里编译，也能跑，只是要有心理准备它会同步
-几 GB 的构建产物，而且偶尔会因为文件被锁而报错。
+**两条铁律：**
+
+1. **不要在 OneDrive 里编译，也不要用 VS Code 打开 OneDrive 里的项目** ——
+   打开就会生成 `.lake\`，几 GB 文件立刻开始被同步。
+2. **每个论文项目一个仓库，而且每个仓库都要有自己的 `.lake`（7–8 GB）。**
+   C 盘只剩约 26 GB，所以从第二篇论文开始，建议放到 `E:\lean\`（还有约 255 GB 空闲）。
 
 ---
 
