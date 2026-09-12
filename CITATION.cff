@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this formalization in your work, please cite it as the software artifact and cite the paper it formalizes."
+title: "FormalProof: a Lean 4 + mathlib formalization project for coding-theory papers"
+abstract: >-
+  A Lean 4 + mathlib formalization of the definitions and main theorems of a
+  coding-theory paper, following the layout, documentation and verification
+  conventions of Shenghao Yang's n4code_lean_dev project.  Includes a
+  paper-to-Lean notation dictionary and consistency checkers.
+authors:
+  - family-names: Liu
+    given-names: ""
+    # TODO: fill in your full name as it should appear in citations
+keywords:
+  - Lean 4
+  - mathlib
+  - formal verification
+  - interactive theorem proving
+  - coding theory
+license: Apache-2.0
+date-released: "2026-09-12"
+# TODO: fill in once the target paper is chosen
+# preferred-citation:
+#   type: article
+#   title: "..."
+#   authors:
+#     - family-names: "..."
+#   journal: "..."
+#   year: ...
+#   doi: ...

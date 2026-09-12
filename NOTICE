@@ -1,0 +1,27 @@
+NOTICE
+======
+
+This project is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party code
+----------------
+
+`FormalProof/Definitions.lean` and `FormalProof/Basic.lean` are adapted from
+`NMCode/CodingTheory.lean` and `N4Code/Definitions.lean` in
+
+    Shenghao Yang, "n4code_lean_dev": a Lean 4 + mathlib formalization of
+    Dong & Yang, "On Optimal Finite-Length Block Codes of Size Four for Binary
+    Symmetric Channels", IEEE Trans. Inf. Theory 71(1):138-166, 2025.
+    https://github.com/shhyang/n4code_lean_dev
+
+which is distributed under the Apache License, Version 2.0.  The adaptation
+covers the generic (paper-independent) layer only: binary words, bitwise XOR,
+Hamming weight and distance, (n, M) codes with maximum-likelihood decoding
+(`dRow`, `dCode`, `alpha`, `lambda`), and code equivalence, together with the
+associated lemmas in `Basic.lean`.  Paper-specific material (the code classes,
+the one/two-column comparison engines, the classification theorems) is *not*
+copied.
+
+The repository layout, documentation conventions (`PLAN.md`, `Notation.md`,
+`CONSISTENCY.md`, `VERIFICATION.md`, `AGENTS.md`) and the verification
+workflow are also modelled on that project.

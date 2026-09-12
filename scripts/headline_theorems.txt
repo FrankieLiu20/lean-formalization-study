@@ -1,0 +1,11 @@
+# Headline results of the FormalProof development.
+#
+# Every name in this manifest must have a `#print axioms` declaration in
+# FormalProof/AxiomCheck.lean, and every `#print axioms` there must be listed
+# here (both directions are enforced by scripts/axioms_check.ps1).  Adding or
+# removing a headline theorem therefore requires an explicit change here.
+dCode_le
+hammingDist_eq_zero_iff
+hammingDist_le
+hammingDist_self
+hammingDist_symm
