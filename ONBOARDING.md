@@ -57,6 +57,7 @@
 | elan | `C:\Users\lenovo\.elan`（版本 4.2.4） |
 | Lean 工具链 | `leanprover/lean4:v4.34.0-rc2` = **Lean 4.34.0-rc2**（mathlib master 要求的版本） |
 | Git | `D:\Program Files\Git\cmd\git.exe`（已配置 `user.name = FrankieLiu20`） |
+| GitHub CLI | `C:\Users\lenovo\gh\bin\gh.exe`（v2.100.0，已登录 `FrankieLiu20`，并配好 git 凭据） |
 | VS Code | `C:\Users\lenovo\AppData\Local\Programs\Microsoft VS Code` |
 
 **还差一步**：给 VS Code 装 Lean 插件。在 VS Code 里按 `Ctrl+Shift+X` 打开扩展面板，
@@ -78,24 +79,29 @@ Lean 项目一旦编译，会在项目里生成 `.lake\` 目录：**几 GB、几
 * OneDrive 同步时会锁文件，编译偶尔报"文件被占用"之类的怪错；
 * 路径很长，容易踩 Windows 的路径长度限制。
 
-所以约定是：**源代码和文档随便放（可以留在 OneDrive 备份），但"编译用的工作副本"
-要放在不被同步的目录**。推荐：
+所以约定是：**文档和源码可以留在 OneDrive（当备份），但"编译用的工作副本"
+要放在不被同步的目录**。这件事**已经替你做好了**：
 
 ```powershell
-# 1) 建一个不被同步的目录
-New-Item -ItemType Directory -Force C:\lean | Out-Null
-
-# 2) 把项目复制过去（不要复制 reference\、.lake\、.git\）
-robocopy "C:\Users\lenovo\OneDrive - CUHK-Shenzhen\桌面\Lean Formalization-Independent study" `
-         C:\lean\ITP-Study /E /XD reference .lake .git
-
-# 3) 之后都在新目录里工作
-cd C:\lean\ITP-Study
+cd C:\lean\lean-formalization-study     # 以后都在这里工作
 ```
 
-（`robocopy` 返回码 1 表示"成功复制了文件"，是正常的。）
+这份工作副本是从 GitHub 克隆的，并且已经跑通 `lake exe cache get` + `lake build`
+（约 7 GB 构建产物都在 `C:\lean` 下，不碰 OneDrive）。
 
-如果你就是想留在这个目录里做，也能跑，只是要有心理准备它会同步几 GB 的构建产物。
+换电脑、或者想重建一份时：
+
+```powershell
+New-Item -ItemType Directory -Force C:\lean | Out-Null
+cd C:\lean
+git clone https://github.com/FrankieLiu20/lean-formalization-study.git
+cd lean-formalization-study
+lake exe cache get     # 取 mathlib 预编译产物（第一次要下载几 GB，只做一次）
+lake build             # 编译（几分钟）
+```
+
+如果你就是想留在 OneDrive 这个目录里编译，也能跑，只是要有心理准备它会同步
+几 GB 的构建产物，而且偶尔会因为文件被锁而报错。
 
 ---
 
@@ -342,7 +348,18 @@ lemma hammingDist_xor_right {n : ℕ} (x y z : Word n) :
 
 ## 8. 把结果放到 GitHub
 
-### 8.1 一次性准备
+### 8.1 一次性准备（已经替你做完 ✅）
+
+* **GitHub CLI** 装在 `C:\Users\lenovo\gh\bin\gh.exe`（v2.100.0），已用设备码
+  登录 **FrankieLiu20**，并配置了 git 凭据——以后 `git push` 不用再登录。
+  （这个目录不在 PATH 里：要么用完整路径 `C:\Users\lenovo\gh\bin\gh.exe`，
+  要么把 `C:\Users\lenovo\gh\bin` 加进 PATH。）
+* **仓库**已创建并推送：<https://github.com/FrankieLiu20/lean-formalization-study>
+  （Public。想改成私有：仓库页 → Settings → 拉到最下面 Change visibility。）
+* **一个项目一个仓库**：每篇论文/每个项目单独建一个仓库（像你老师的
+  `n4code_lean_dev`），不要把不同论文塞进同一个仓库。
+
+下面是手动做一遍的步骤，供你以后自己建新项目时参考：
 
 1. 注册 GitHub 账号（如果还没有）。
 2. 建仓库：右上角 `+` → **New repository** → 名字建议 `itp-study` 或

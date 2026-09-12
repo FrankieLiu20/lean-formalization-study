@@ -6,12 +6,13 @@ Follow `AGENTS.md` when working in this repository.
 
 - [ ] Choose the target paper (see `PLAN.md` §1.1) and record the decision here
       and in `DEVLOG.md`.
-- [ ] Move the working copy out of OneDrive (`ONBOARDING.md` §3) before running
-      `lake exe cache get` on this machine.
+- [x] Move the working copy out of OneDrive (`ONBOARDING.md` §3) — done: the
+      working copy lives in `C:\lean\lean-formalization-study`.
 
 ## Repository hygiene
 
-- [ ] `git init`, first commit, and push to GitHub (`ONBOARDING.md` §8).
+- [x] `git init`, first commit, and push to GitHub (`ONBOARDING.md` §8) —
+      <https://github.com/FrankieLiu20/lean-formalization-study>
 - [ ] Install the VS Code "Lean 4" extension (`ONBOARDING.md` §2).
 - [ ] Add the CI badge to `README.md` once the workflow has run once.
 - [ ] Set the repository description/topics on GitHub.

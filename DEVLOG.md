@@ -4,6 +4,41 @@ Working notes for the formalization.  Everything here is supplementary; the
 source of truth for the proof state is `PLAN.md`, and the paper is the
 authoritative reference for the mathematics.  Newest entries first.
 
+## 2026-09-12 — GitHub repository, and the first kernel-checked build
+
+The scaffold was pushed to <https://github.com/FrankieLiu20/lean-formalization-study>
+(public; one repository per project, following the reference project's habit)
+and a working copy was cloned to `C:\lean\lean-formalization-study`, outside
+OneDrive.  `lake exe cache get` + `lake build` were run in that copy:
+
+```
+✔ [949/952] Built FormalProof.Basic
+ℹ [950/952] Built FormalProof.AxiomCheck
+  'FormalProof.hammingDist_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+  ... (the same for hammingDist_symm, hammingDist_eq_zero_iff, hammingDist_le, dCode_le)
+✔ [951/952] Built FormalProof
+Build completed successfully (952 jobs).
+```
+
+So the paper-independent layer is not just written but **kernel-checked**, and
+the headline lemmas use only the standard trusted axioms — no `sorryAx`, no
+`native_decide` trust axioms.  `scripts/consistency_check.ps1` (build +
+orphan-module check + label check, 0 `sorry`) and `scripts/axioms_check.ps1`
+(manifest coverage + allowlist) were both run and pass.
+
+Two mathlib-migration problems were found and fixed while porting the generic
+core (both recorded in `AGENTS.md` §Common failure modes):
+
+* `Finset.min'` needs `Mathlib.Data.Finset.Max`;
+* `Finset.sum_le_sum` moved to
+  `Mathlib.Algebra.Order.BigOperators.Group.Finset`, and
+  `Mathlib.Data.Real.Basic` is deprecated in favour of
+  `Mathlib.Basic.Real.Basic`.
+
+Tooling note: GitHub CLI 2.100.0 was installed under `C:\Users\lenovo\gh`
+(no winget/scoop/choco on this machine), authenticated with the device-code
+flow, and `gh auth setup-git` configured the git credential helper.
+
 ## 2026-09-12 — Project scaffold
 
 ### Toolchain decision (and the trap it avoids)
