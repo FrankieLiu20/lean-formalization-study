@@ -65,7 +65,8 @@ minimal and never `import Mathlib`.  Details in [`AGENTS.md`](AGENTS.md).
 
 > **Windows/OneDrive note.**  A Lean project creates a multi-gigabyte `.lake/`
 > build directory.  Do not build inside a OneDrive-synced folder — keep the
-> working copy outside sync (e.g. `C:\lean\...`).  See `ONBOARDING.md` §3.
+> working copy outside sync; on this machine the project lives in
+> `E:\lean\lean-formalization-study`.  See `ONBOARDING.md` §3.
 
 ## Verification
 

@@ -7,7 +7,7 @@ Follow `AGENTS.md` when working in this repository.
 - [ ] Choose the target paper (see `PLAN.md` §1.1) and record the decision here
       and in `DEVLOG.md`.
 - [x] Move the working copy out of OneDrive (`ONBOARDING.md` §3) — done: the
-      working copy lives in `C:\lean\lean-formalization-study`.
+      working copy lives in `E:\lean\lean-formalization-study`.
 
 ## Repository hygiene
 

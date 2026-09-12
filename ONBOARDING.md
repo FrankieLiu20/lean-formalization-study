@@ -69,7 +69,7 @@
 
 ---
 
-## 3. ⚠️ 文件存放规则：文档在 OneDrive，代码在 C:\lean（重要）
+## 3. ⚠️ 文件存放规则：文档在 OneDrive，代码在 E:\lean（重要）
 
 Lean 项目一旦编译，会在项目里生成 `.lake\` 目录：**约 7 GB、几万个文件**
 （mathlib 的预编译结果）。让 OneDrive 同步这些东西有三个坏处：
@@ -78,8 +78,7 @@ Lean 项目一旦编译，会在项目里生成 `.lake\` 目录：**约 7 GB、�
 * OneDrive 同步时会锁文件，编译偶尔报"文件被占用"之类的怪错；
 * 路径很长，容易踩 Windows 的路径长度限制。
 
-所以规则是：**文档放 OneDrive，代码放 `C:\lean`（以后可以是 `E:\lean`）**。
-已经替你安排好了：
+所以规则是：**文档放 OneDrive，代码放 `E:\lean`**。已经替你安排好了：
 
 ```text
 OneDrive\桌面\Lean Formalization-Independent study\   ← 资料区（自动同步，手机也能看）
@@ -87,7 +86,7 @@ OneDrive\桌面\Lean Formalization-Independent study\   ← 资料区（自动�
 ├─ notes\       读书笔记 / 定理清单草稿
 └─ README.md    这个布局的说明
 
-C:\lean\                                              ← 代码区（不参与 OneDrive 同步）
+E:\lean\                                              ← 代码区（不参与 OneDrive 同步）
 ├─ lean-formalization-study\   指南仓库（工作副本，已编译通过）
 ├─ reference\n4code_lean_dev\  你老师仓库的克隆，用来对照写法
 └─ _archive\...                早期放在 OneDrive 的那份代码（已归档，可删）
@@ -96,20 +95,24 @@ C:\lean\                                              ← 代码区（不参与 
 换电脑、或者想重建一份代码副本时：
 
 ```powershell
-New-Item -ItemType Directory -Force C:\lean | Out-Null
-cd C:\lean
+New-Item -ItemType Directory -Force E:\lean | Out-Null
+cd E:\lean
 git clone https://github.com/FrankieLiu20/lean-formalization-study.git
 cd lean-formalization-study
 lake exe cache get     # 取 mathlib 预编译产物（第一次要下载几 GB，只做一次）
 lake build             # 编译（几分钟）
 ```
 
-**两条铁律：**
+**三条铁律：**
 
 1. **不要在 OneDrive 里编译，也不要用 VS Code 打开 OneDrive 里的项目** ——
    打开就会生成 `.lake\`，几 GB 文件立刻开始被同步。
-2. **每个论文项目一个仓库，而且每个仓库都要有自己的 `.lake`（7–8 GB）。**
-   C 盘只剩约 26 GB，所以从第二篇论文开始，建议放到 `E:\lean\`（还有约 255 GB 空闲）。
+2. **在 VS Code 里要用"打开文件夹"（Ctrl+K Ctrl+O），不要只双击打开单个 `.lean` 文件。**
+   只打开文件时插件找不到 `lakefile.toml` / `lean-toolchain`，会退回到 elan 的默认版本，
+   于是可能用**错误的 Lean 版本**去加载 mathlib（症状：Infoview 空白、右下角一直转、
+   CPU 狂转）。elan 的默认版本已经设成项目用的那个，但正确做法仍然是打开文件夹。
+3. **每个论文项目一个仓库，而且每个仓库都要有自己的 `.lake`（7–8 GB）。**
+   所以项目都放 E 盘（约 247 GB 空闲）——现在这个项目就在 `E:\lean\lean-formalization-study`。
 
 ---
 
@@ -160,7 +163,7 @@ lake build             # 编译（几分钟）
 
 ## 5. 一次完整的工作循环
 
-这是你以后每天重复的动作（假设你在 `C:\lean\ITP-Study`）：
+这是你以后每天重复的动作（假设你在 `E:\lean\lean-formalization-study`）：
 
 ```powershell
 # 0) 第一次：拉依赖（只做一次，之后都是增量的）
@@ -383,7 +386,7 @@ lemma hammingDist_xor_right {n : ℕ} (x y z : Word n) :
 ### 8.2 把本地项目推上去
 
 ```powershell
-cd C:\lean\ITP-Study
+cd E:\lean\lean-formalization-study
 git init                       # 如果还没初始化
 git add -A
 git commit -m "initial commit: project skeleton following the n4code_lean_dev layout"

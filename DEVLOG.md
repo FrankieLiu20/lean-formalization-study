@@ -4,6 +4,29 @@ Working notes for the formalization.  Everything here is supplementary; the
 source of truth for the proof state is `PLAN.md`, and the paper is the
 authoritative reference for the mathematics.  Newest entries first.
 
+## 2026-09-12 (later) — working area moved to `E:\lean`
+
+All Lean work now lives on `E:` (fixed disk, ~247 GB free, versus ~26 GB free on
+`C:`).  The move was done by **re-cloning and rebuilding**, not by moving the
+built directory: lake's build traces contain absolute paths, so a moved tree
+would have been rebuilt from scratch (and rebuilding mathlib from source is an
+hour-long trap).  `lake exe cache get` restored the oleans from the local
+cache, and `lake build` was green (952 jobs, standard axiom set).
+
+* `E:\lean\lean-formalization-study` — the project (working copy)
+* `E:\lean\reference\n4code_lean_dev` — the reference repository
+* `E:\lean\_archive\2026-09-12-onedrive-code-copy` — the old OneDrive copy
+* the working copy under `C:\lean` was deleted; the unused Lean 4.33.x
+  toolchains were uninstalled (freed ~10 GB on `C:`)
+
+**Trap found: elan's default toolchain.**  The first toolchain installed on this
+machine (`leanprover/lean4:v4.33.0`) had silently become elan's *default*.  When
+VS Code's Lean extension ran without a project folder opened, it launched the
+language server with 4.33.0 instead of the project's 4.34.0-rc2 — the Infoview
+stayed empty and the server burned CPU.  Fixed with
+`elan default leanprover/lean4:v4.34.0-rc2`, and the lesson is in
+`ONBOARDING.md` §3: **always open the project folder, not a single file.**
+
 ## 2026-09-12 — GitHub repository, and the first kernel-checked build
 
 The scaffold was pushed to <https://github.com/FrankieLiu20/lean-formalization-study>
