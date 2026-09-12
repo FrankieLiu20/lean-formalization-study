@@ -2,6 +2,8 @@
 
 > **Repository:** <https://github.com/FrankieLiu20/lean-formalization-study>
 
+[![CI](https://github.com/FrankieLiu20/lean-formalization-study/actions/workflows/ci.yml/badge.svg)](https://github.com/FrankieLiu20/lean-formalization-study/actions/workflows/ci.yml)
+
 This repository is a **Lean 4 + mathlib** formalization project for
 independent study: it turns the definitions, theorems and proofs of a
 published paper into Lean code that the proof kernel checks mechanically, so

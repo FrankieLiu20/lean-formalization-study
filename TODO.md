@@ -14,7 +14,8 @@ Follow `AGENTS.md` when working in this repository.
 - [x] `git init`, first commit, and push to GitHub (`ONBOARDING.md` §8) —
       <https://github.com/FrankieLiu20/lean-formalization-study>
 - [ ] Install the VS Code "Lean 4" extension (`ONBOARDING.md` §2).
-- [ ] Add the CI badge to `README.md` once the workflow has run once.
+- [x] Add the CI badge to `README.md` once the workflow has run once (green on
+      the first successful run).
 - [ ] Set the repository description/topics on GitHub.
 
 ## Formalization
